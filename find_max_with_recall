@@ -1,0 +1,19 @@
+void largest(const int list[], int lowerindex, upperindex)
+{
+
+  if (lowerindex==upperindex)
+  return list[lowerindex];
+  else 
+  {
+    int max;
+    max=largest(list, lowerindex+1, upperindex);
+    if (list[lowerindex]>max)
+    {
+      return list[lowerindex];
+    }
+    else
+    {
+      return max;
+    }
+  }
+}
