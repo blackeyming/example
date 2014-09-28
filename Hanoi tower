@@ -11,3 +11,6 @@ void moveDisks(int count , int needle1, int needle3, int needle2)
 		moveDisks(count-1, needle2, needle3,needle1);
 	}
 }
+
+// note : when recursive（递归）, cost more time and memory than iteration（迭代）, for the reason that recursive build many 
+// temparory variables in function life.
