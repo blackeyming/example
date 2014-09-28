@@ -1,0 +1,27 @@
+void binToDec( int binaryNumber, int &decimal, int &weight)
+{
+	int bit;
+	if (binaryNumber>0)
+	{
+		bit=binaryNumber%10;
+		decimal+=bit*static_cast<int>(pow(2,weight));
+		binaryNumber=binaryNumber/10;
+		weight++;
+		binToDec(binaryNumber,decimal, weight);
+	}
+}
+
+void DecToBin(int Decimal, int & Binary, int &weight)
+{
+  int bit;
+  if (Decimal>0)
+  {
+    bit=Decimal%2;
+    Binary=bit*static_cast<int>(pow(10,weight));
+    Decimal=Decimal/2;
+    weight++;
+    DecToBin(Decimal, Binary,weight);
+  }
+}
+
+// the same theory except change the number 2 to 10.
