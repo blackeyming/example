@@ -8,4 +8,6 @@
 6. shadow copy: more than one pointer valiable point to one memory address, which cause error when delete one of them;
 7. deep copy: ensure when copy pointer valiable, each valiable point to their own address. in case of shadow copy.
 8. when operating in class, pay attention to overloading of operator "=",in case of shadow copy.
-9. 
+9. when define destructor, we should pay attention to judge whether any pointer of the class is NULL, if not, delete it.
+10. copy constructor should be defined in class to avoid shadow copy, in form of "classname(const classType & anotherclass);"
+11. 
