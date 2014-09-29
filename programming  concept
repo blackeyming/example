@@ -10,4 +10,8 @@
 8. when operating in class, pay attention to overloading of operator "=",in case of shadow copy.
 9. when define destructor, we should pay attention to judge whether any pointer of the class is NULL, if not, delete it.
 10. copy constructor should be defined in class to avoid shadow copy, in form of "classname(const classType & anotherclass);"
-11. I realize that I am losing something important, while it lighten heart and make itself fly up.
+11. If there are pointer valiables in class, pay attention to three thing(8,9,10):
+    (1) contain destructor in class;
+    (2) overload oprator= in class;
+    (3) contain copy constructor in class.
+12. I realize that I am losing something important, while it lighten heart and make itself fly up.
