@@ -1,0 +1,53 @@
+1. initial valiable when defining in class is not allowed.
+2. function members have access to any valiable in class, which mean that function member use more valiable besides reference.
+3. to understand private and public: when the member is only used in class, set it private; when other function outside class
+have access to, set it public or protect. call details hidden and abstract encapsulation(抽象封装).
+4. reference parameter in function is not allowed to be changed but value parameter in contrarory.
+5. define function prototype(原型) in class, no details, due to information hidden.
+6. constructor is set to initialize the valiables of class, which don't have either return type or value, it is not void function
+while share the same name with class. if no parameter, we call default constructor.
+7. illegal use of default constructor: "classname object()",due to redundent "()".
+8. if there are no constructors totally fit for the calling of function in parameters, the most approximately one will be chose.
+9. what is default constructor: those who with no parameter, or all the parameters have default values.like: student(int age=0; int goal=0; bool sex=1);
+10. only one destructor in class, have no parameter,have no return type and value, perform when class object is set free.
+11. Abstraction is to seprate the implementation details and using interface.
+12. abstract data type (ADT) contains only logical features of object, no implementation details. like defination of class.
+it contains data type name(class type name), domain and operations.
+like:
+  datatypename
+       clockType;
+  domain:
+      each clockType value is a time of day in the form of hours, minutes, seconds.
+ operations:
+      settime();
+      incrementhours()
+      ...
+13. domain(域): those valiables in class;
+14. is-a (inheritance, 继承): private succeed in default
+    public: 
+    public->public;
+    protec->protect(access to member function in derive class and friend function)
+    private->no access to derive class, but can use public member functions or friend functions of base class to  access.
+    private: public->private; protect:
+15. derived class can't override an interface function in base class, while it can redefine an interface function in base 
+class via function overloading.
+16. all the members in base class also belong to derive class, while derive class object can't use the private valiables in
+base class directly. often relies on the constructor of derive class.
+17. to inspire the constructor of base class: 
+   (1) use default constructor of derive class like  DeriveClassType(){newmember=value;}
+   (2) illustrate what constructor use like DeriveClassType(int a, int b,int newvalue):BaseClassType(a,b){newmember=newvalue;}
+18. protect valiable is set for derive class, which can be used and set by derive class objects.
+19. member function or not depends on if can be set virtual.
+20. operator<< and operator>> can't be member function, make it friend function.
+21. friend functions are not limited by private or public, can locate at anywhere in defination of class.
+22. friend function is not member function of class, don't use "::"
+23. friend function can't access the valiable of class directly, via project.membervaliable.
+24. friend function can't be succeed
+25. when use friend function, declare what class object will use in function paramater.
+26. member function in one class can be friend function of another class. declare in the defination of class first.
+27. if there is one thing i can do well, that is make a wonderful miracle.
+  `
+
+
+
+    
