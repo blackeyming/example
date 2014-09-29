@@ -1,0 +1,247 @@
+//book2.hfile
+
+#ifndef book2
+#define book2
+#include<iostream>
+using namespace std;
+class arrayListType
+{
+public:
+	bool isEmpty();
+	bool isFull();
+	int ListSize();
+	int maxListSize();
+	void print() const;
+	bool isItemAtEqual(int location, int item);
+	void insertAt(int location, int insertItem);
+	void insertEnd(int insertItem);
+	void removeAt(int location);
+	void retrieveAt(int location, int & retItem);
+	void replaceAt(int location, int repItem);
+	void clearList();
+	int seqSearch(int item);
+	void insert(int insertItem);
+	void remove(int removeItem);
+	arrayListType(int size=100);
+	arrayListType( const arrayListType & otherList);
+	~arrayListType();
+protected:
+	int *list;
+	int length;
+	int maxSize;
+};
+#endif
+
+// book2_main.cpp
+#include<iostream>
+#include"book2.h"
+void testCopyConstructor(arrayListType testList)
+{
+	cout<<"Line 23: Inside the function testCopyConstructor."<<endl;
+	testList.print();
+	cout<<"Line 25: the List size is:"<<testList.ListSize()<<endl;
+}
+int main()
+{
+	arrayListType list;
+	int num;
+	cout<<"Line 3 : Enter numbers ending with -999"<<endl;
+	cin>>num;
+	while(num!=-999)
+	{
+		list.insert(num);
+		cin>>num;
+	}
+	cout<<"Line 8 : The List you entered is:"<<endl;
+	list.print();
+	cout<<"Line 10: The list size is:"<<list.ListSize()<<endl;
+	cout<<"Line 11: Enter the item to be deleted:"<<endl;
+	cin>>num;
+	cout<<endl;
+	list.remove(num); 
+	cout<<"Line 15: after removing "<<num<<" the list is:"<<endl;
+	list.print();
+	cout<<"Line 16: The list size is: "<<list.ListSize()<<endl;
+	testCopyConstructor(list);
+	cout<<"Line 19: The list after the copy constructor "<<endl;
+	list.print();
+	cout<<"Line 21: The list size is: "<<list.ListSize()<<endl;
+	while(1);
+	return 0;
+}
+
+//book2.cpp
+#include"book2.h"
+bool arrayListType::isEmpty()
+{
+	return (length==0);
+}
+bool arrayListType::isFull()
+{
+	return (length==maxSize);
+}
+int arrayListType::ListSize()
+{
+	return length;
+}
+int arrayListType::maxListSize()
+{
+	return maxSize;
+}
+void arrayListType::print()const
+{
+	int i;
+	for (i=0;i<length;i++)
+	{
+		cout<<list[i]<<" ";
+	}
+	cout<<endl;
+}
+bool arrayListType::isItemAtEqual(int location, int item)
+{
+	return (list[location]==item);
+}
+void arrayListType::insertAt(int location, int insertItem)
+{
+	int i;
+	if (location<0 || location>=maxSize)
+		cout<<"The position of the item to be inserted is out of range"<<endl;
+	else
+	{
+		for (i=length;i>location;i--)
+			list[i]=list[i-1];
+		list[location]=insertItem;
+		length++;
+	}
+}
+void arrayListType::insertEnd(int insertItem)
+{
+	if (length>=maxSize)
+		cout<<"cannot insert in a full list"<<endl;
+	else
+	{
+		list[length]=insertItem;
+		length++;
+	}
+}
+
+void arrayListType::removeAt(int location)
+{
+	int i;
+	if (location<0 || location >=length)
+	{
+		cout<<"the location of the item to be removed is out of range"<<endl;
+	}
+	else
+	{
+		for (i=location;i<length;i++)
+		{
+			list[i]=list[i+1];
+		}
+		length--;
+	}
+}
+void arrayListType::retrieveAt(int location, int &retItem)
+{
+	if (location < 0 || location >=length)
+		cout<<"out of range"<<endl;
+	else
+	{
+		retItem=list[location];
+
+	}
+}
+void arrayListType::replaceAt(int location, int repItem)
+{
+	if(location<0 || location>=length)
+		cout<<"out of range"<<endl;
+	else
+	{
+		list[location]=repItem;
+	}
+}
+void arrayListType::clearList()
+{
+	length=0;
+}
+arrayListType::arrayListType(int size)
+{
+	if (size<0)
+	{
+	cout<<"the array must be positive"<<endl;
+	maxSize=100;
+	}
+	else
+		maxSize=size;
+	length=0;
+	list=new int[maxSize];
+}
+arrayListType::~arrayListType()
+{
+	delete[] list;
+}
+arrayListType::arrayListType(const arrayListType &otherList)
+{
+	int j;
+	maxSize=otherList.maxSize;
+	length=otherList.length;
+	list=new int [maxSize];
+	if (length!=0)
+	{
+		for (j=0;j<length;j++)
+			list[j]=otherList.list[j];
+	}
+}
+int arrayListType::seqSearch(int item)
+{
+	int loc;
+	bool found=false;
+	for (loc=0;loc<length;loc++)
+		if (list[loc]==item)
+	{
+		found=true;
+		break;
+	}
+		if (found)
+		{
+			return loc;
+		}
+		else
+			return -1;
+}
+void arrayListType::insert(int insertItem)
+{
+	int loc;
+	if (length==0)
+		list[length++]=insertItem;
+	else if (length==maxSize)
+		cout<<"Cannot insert in a full list"<<endl;
+	else
+	{
+		loc=seqSearch(insertItem);
+		if (loc==-1)
+			list[length++]=insertItem;
+		else
+			cout<<"the item to be inserted is already in list "
+			<<"no duplicates are allowed"<<endl;
+	}
+}
+void arrayListType::remove(int removeItem)
+{
+	int loc;
+	if (length==0)
+		cout<<"cannot delete from an empty list"<<endl;
+	else
+	{
+		loc=seqSearch(removeItem);
+		if (loc!=-1)
+			removeAt(loc);
+		else
+			cout<<"The item to be deleted is not in the list"<<endl;
+	}
+}
+
+
+
+
+
