@@ -1,4 +1,11 @@
 1. OOD: (1) encapsulation(封装): package the data and operator;
         (2) inherite: make new basing on old;
-        (3) polymophic(多态): use the function with same name but different parameters.
-2. 
+        (3) polymophic(多态): use same name expression to do different things.
+2. inside state && outside state of object are: (1) private member;(2) public member;
+3. before initializing the member valiable in derive class, inspire the constructor of base class;
+4. increment/decrement operation(++, --)increse the valiable in size of the data type of the itself.
+5. when quote a pointer valiable in parameter of function, formation is like: returnType funtionname(int* & parameter)
+6. shadow copy: more than one pointer valiable point to one memory address, which cause error when delete one of them;
+7. deep copy: ensure when copy pointer valiable, each valiable point to their own address. in case of shadow copy.
+8. when operating in class, pay attention to overloading of operator "=",in case of shadow copy.
+9. 
