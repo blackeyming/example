@@ -1,0 +1,8 @@
+1. struct{} only define type of variables, no defination of any valiables.and no memory distribution either. but after a concrete
+valiable is defined, thing change to the opposite.
+2. we know that array is not allowed to be return in function, it only can serve as reference parameter in function. however,
+struct can be both value parameter and reference parameter, also be returned by function.
+3. remember that struct valiable can be assigned by another struct valiable.
+4. and we can assign value to array through struct due to 3.
+5. struct is no diffence with class except that it is public valiable in struct while private in class when in defaut.
+what class can is what struct can.
