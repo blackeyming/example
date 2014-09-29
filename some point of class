@@ -28,7 +28,20 @@ like:
     public->public;
     protec->protect(access to member function in derive class and friend function)
     private->no access to derive class, but can use public member functions or friend functions of base class to  access.
-    private: public->private; protect:
+    private: public->private; protect->private;
+    protect: public->protect; protect->protect;
+    
+    has-a:
+    class living
+    {
+      public:
+      living(int a=0,int b=0):money(a),cost(b){};
+      ~living();
+      private:
+      int money;
+      int cost;
+    }
+    
 15. derived class can't override an interface function in base class, while it can redefine an interface function in base 
 class via function overloading.
 16. all the members in base class also belong to derive class, while derive class object can't use the private valiables in
@@ -45,7 +58,7 @@ base class directly. often relies on the constructor of derive class.
 24. friend function can't be succeed
 25. when use friend function, declare what class object will use in function paramater.
 26. member function in one class can be friend function of another class. declare in the defination of class first.
-27. if there is one thing i can do well, that is make a wonderful miracle.
+27. If there is still one thing I can do well, that is making a wonderful miracle to touch my heart.
   `
 
 
