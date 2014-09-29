@@ -31,7 +31,7 @@ like:
     private: public->private; protect->private;
     protect: public->protect; protect->protect;
     
-    has-a:
+    has-a: only can use the object name to inspire the constructor of the inside class. like: 
     class living
     {
       public:
@@ -41,7 +41,15 @@ like:
       int money;
       int cost;
     }
-    
+    class student
+    {
+      public:
+      student(int a=0, int b=0, int c=0):Id(a),level(b,c);
+      ~student();
+      private:
+      int ID;
+      living level;
+    }
 15. derived class can't override an interface function in base class, while it can redefine an interface function in base 
 class via function overloading.
 16. all the members in base class also belong to derive class, while derive class object can't use the private valiables in
