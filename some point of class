@@ -66,7 +66,9 @@ base class directly. often relies on the constructor of derive class.
 24. friend function can't be succeed
 25. when use friend function, declare what class object will use in function paramater.
 26. member function in one class can be friend function of another class. declare in the defination of class first.
-27. If there is still one thing I can do well, that is making a wonderful miracle to touch my heart.
+27. member valiables in class are initialed according to the order they defined, not the order of parameter list of function.
+28. Inside constructors are ealier inspired than the hole constructor of a class.
+29. If there is still one thing I can perform well, that is making a wonderful miracle to touch my heart.
   `
 
 
