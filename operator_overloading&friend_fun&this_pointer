@@ -16,4 +16,14 @@
 8. overloading operator ">>" and "<<" in such form: 
    istream & operator>>(istream & isobject,  className & cobject)
    ostream & operator<<(ostream & osobject,  className & cobject)
-9. 
+   return type should be reference of iostream object for the convenience of "cout<<object1<<object2";
+9. overloading operator "=" in such form:
+   const className & className::operator=(const className & rightObject)
+   {
+      if (this != & rightObject)
+      {}
+      return *this;
+   }
+   return  const "*this" is for the convenience of "object1=object2=object3"
+10. One of the reasons why human be so foolish is that we rely too much on the enviroment around.
+
