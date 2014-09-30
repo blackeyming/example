@@ -1,0 +1,11 @@
+1. operator overloading formation: returnType operator operatorsymbol(formal parameter list) like:
+   bool operator=(const int & a)
+2. tips of overloading: 
+   (1) don't change the priority of operator
+   (2) don't change the associativity(结合律) of operator
+   (3) can't use default parameter 
+   (4) can't change the number of parameter that the operator need
+   (5) can't overloading new operator like: "." ,".*", "::", "?:", "sizeof".
+   (6) can't change the original rules of the operator.
+   (7) operator can be overloading both in costumer define data type or inside-build data type.
+3. "this" pointer: each object have "this" pointer, it is used when member function call object.
