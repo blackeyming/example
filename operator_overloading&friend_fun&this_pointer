@@ -13,4 +13,7 @@
 5. if operator in the left of the overloading operator is in the different type of the class, that should be defined as friend function
 6. if operator in the right of the overloading operator is in the same type of the class, that the left operator should be the class type.
 7. other overloading functions can both be the member function and friend funtion.
-8. 
+8. overloading operator ">>" and "<<" in such form: 
+   istream & operator>>(istream & isobject,  className & cobject)
+   ostream & operator<<(ostream & osobject,  className & cobject)
+9. 
