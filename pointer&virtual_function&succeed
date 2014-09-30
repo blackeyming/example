@@ -35,4 +35,9 @@ Pay attention to the pointer defination in main funtion:
 	callPrint(two);
 9. declare the destructor of base class virtual, and the destructor of  derive class will be virtual automatically, it is
 the must both in 2 and when there are other virtual members in base class, make the memory recycling come true.
-
+10. private member in class can be accessed and changed, via returning the address in member function, to avoid this, declare
+the return type of function const. so, it can be accessed but not changed.like:
+ const int & baseClass::addressofX()
+{
+	return x;
+}
