@@ -8,4 +8,9 @@
    (5) can't overloading new operator like: "." ,".*", "::", "?:", "sizeof".
    (6) can't change the original rules of the operator.
    (7) operator can be overloading both in costumer define data type or inside-build data type.
-3. "this" pointer: each object have "this" pointer, it is used when member function call object.
+3. "this" pointer: each object have "this" pointer, it is used when member function call object."*this" mean the object.
+4. overloading function of "()","[]","->","=", should be member of class
+5. if operator in the left of the overloading operator is in the different type of the class, that should be defined as friend function
+6. if operator in the right of the overloading operator is in the same type of the class, that the left operator should be the class type.
+7. other overloading functions can both be the member function and friend funtion.
+8. 
