@@ -25,5 +25,147 @@
       return *this;
    }
    return  const "*this" is for the convenience of "object1=object2=object3"
-10. One of the reasons why human be so foolish is that we rely too much on the enviroment around.
+10. example for overloading of "operator=" in class List.
+    const cAssignmentOprOverload & cAssignmentOprOverload::operator=(const cAssignmentOprOverload & otherList)
+    {
+      if (this != &otherList)
+      {
+         if (List!=NULL)
+         destroyList();
+         maxSize=otherList.maxSize;
+         length=otherList.length;
+         if (maxSize!=0)
+         {
+            list=new int [maxSize];
+            if(length!=0)
+            {
+               for (int i=0;i<length;i++)
+               list[i]=otherList.list[i];
+            }
+            else
+            list=NULL;
+         }
+      }
+      return *this;
+    }
+11. example of overloading of prepose(前置) "operator++" :
+   in member function style
+   className className::operator++()
+   {
+      member_valiable++;
+      return *this;
+   }
+   or in friend function style
+   className operator++(className & incobject)
+   {
+      (incobject.member_valiable)++;
+      return incobject;
+   }
+12. example of overloading of postposition(后置) "operator++"
+   in member function style
+   className className::operator++(int) // int is a virtual parameter to mark the prepose operator++;
+   {
+      className *temp=this;
+      member_valiable++;
+      return temp; 
+   }
+   in friend function style
+   className operator++(className &incobject, int u)
+   {
+      className temp=incobject;
+      incobject.member_valiable++;
+      return temp;
+   }
+13. conscious of the memory and efficiency, more often define overloading of operator in member function of class 
+14. concrete example clocktype for the overloading operator:
+// book2_clockType.hfile
+#ifndef book2_clockType
+#define book2_clockType
+#include<iostream>
+using namespace std;
+class clockType
+{
+	friend ostream & operator<<(ostream &, const clockType &);
+	friend istream & operator>>(istream &, clockTYpe &);
+public:
+	void setTime(int hours, int minutes, int seconds);
+	void getTime(int &hours, int &minutes, int seconds);
+	clockType operator++();
+	bool operator==(const clockType &otherClock)const;
+	bool operator<=(const clockType &otherClock)const;
+	clockType (int hours=0, int minutes=0, int seconds=0);
+private:
+	int hr;
+	int min;
+	int sec;
+};
+#endif
 
+// book2_clockType.cpp
+#include"book2_clockType.h"
+ostream & operator<<(ostream & osbject, const clockType & otherclock)
+{
+	if (otherclock.hr<10)
+		cout<<"0";
+	osbject<<otherclock.hr<<":";
+	if (otherclock.min<10)
+		cout<<"0";
+	osbject<<otherclock.min<<":";
+	if (otherclock.sec<10)
+		cout<<"0";
+	osbject<<otherclock.sec<<endl;
+	return osbject;
+}
+istream & operator>>(istream & isobject, clockType & otherclock)
+{
+	isobject>>otherclock.hr;
+	isobject>>otherclock.min;
+	isobject>>otherclock.sec;
+	return isobject;
+}
+void clockType::setTime(int hours, int minutes, int seconds)
+{
+	if (hours<0 || hours>23)
+		hr=0;
+	hr=hours;
+	if (minutes<0 || minutes>59)
+		min=0;
+	min=minutes; 
+	if (seconds<0 || seconds>59)
+		seconds=0;
+	sec=seconds;
+}
+void clockType::getTime(int &hours, int &minutes, int seconds)
+{hr=hours; min=minutes; sec=seconds;}
+clockType clockType::operator++()
+{
+	sec++;
+	if (sec>59)
+	{ sec=0; min++;}
+	if (min>59)
+	{ min=0; hr++;}
+	if (hr>23)
+	{ hr=0;}
+}
+bool clockType::operator==(const clockType &otherClock)const
+{  return (this->hr==otherClock.hr && this->min==otherClock.min && this->sec==otherClock.sec);}
+bool clockType::operator<=(const clockType &otherClock)const
+{
+	bool situation1= this->hr<otherClock.hr;
+	bool situation2=this->hr==otherClock.hr && this->min<otherClock.min;
+	bool situation3=this->hr==otherClock.hr && this->min==otherClock.min && this->sec<otherClock.sec;
+	return ( situation1 || situation2 || situation3 ) ;
+}
+clockType::clockType(int hours=0, int minutes=0, int seconds=0)
+{
+	if (hours<0 || hours>23)
+		hr=0;
+	hr=hours;
+	if (minutes<0 || minutes>59)
+		min=0;
+	min=minutes; 
+	if (seconds<0 || seconds>59)
+		seconds=0;
+	sec=seconds;
+}
+15. One of the reasons why human be so foolish is that we rely too much on the enviroment around.
