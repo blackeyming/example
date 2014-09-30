@@ -1,5 +1,5 @@
-1. class object can be parameter of function both in value and reference.
-2. derive class object can be base class type parameter in funtion, while perform member of the derive class object.  
+1. class object can be parameter of function both in pointer and reference, not value, due to 7.
+2. derive class object can be base class type parameter in funtion,and perform member of the base class object.  
 3. when in 2 , due to compile-time binding, and so call static-binding. because parameter is predefined in function.
 4. without virtual funtion, overloading funtion in deriveClass in this way:
   void deriveClass::print()
@@ -8,5 +8,31 @@
 	baseClass::print();
 	cout<<"In deriveClass a= "<<a<<endl;
 }
-output is " In baseClass x= x_value_of_deriveClass";
-5. 
+when call  function : callPrint(deriveClass_object)
+  void callPrint(baseClass &p)
+{
+	cout<<"call the external function callPrint: "<<endl; 
+	p.print();
+}
+call the print() member of baseClass_object.
+5. virtual funtion is designed to solve the problem above, owe to the run-time binding, also call the dynamic-binding, which 
+don't decide which function to be performed in compile time, no compile code about it, only produce infomation of the function for the system in run-time to be
+correctly call the function of class.
+6. virtual function in baseClass also can have its own defination, while more often, we don't detail it in baseClass.
+7. if parameter is value type, value of the derive class will copy to parameter, this cause some value losing, and function
+member will not be copied, so use reference or pointer of class object parameter in funciion.
+8. void callPrint(baseClass * p)
+{
+	cout<<"callPrint function ( pointer ) "<<endl;
+	p->print();
+}
+Pay attention to the pointer defination in main funtion:
+	baseClass * one=new baseClass(4);
+	deriveClass * two=new deriveClass(8,16);
+	one->print();
+	two->print();
+	callPrint(one);
+	callPrint(two);
+9. declare the destructor of base class virtual, and the destructor of  derive class will be virtual automatically, it is
+the must both in 2 and when there are other virtual members in base class, make the memory recycling come true.
+
