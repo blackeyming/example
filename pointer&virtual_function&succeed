@@ -1,0 +1,12 @@
+1. class object can be parameter of function both in value and reference.
+2. derive class object can be base class type parameter in funtion, while perform member of the derive class object.  
+3. when in 2 , due to compile-time binding, and so call static-binding. because parameter is predefined in function.
+4. without virtual funtion, overloading funtion in deriveClass in this way:
+  void deriveClass::print()
+{
+	cout<<"In derivedClass**** x (use baseClass::print()) = : ";
+	baseClass::print();
+	cout<<"In deriveClass a= "<<a<<endl;
+}
+output is " In baseClass x= x_value_of_deriveClass";
+5. 
