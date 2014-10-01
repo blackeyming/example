@@ -1,5 +1,5 @@
 1. class list1; const class list2; list1[2]=list2[5]; first excute the list2.operator[](5), because it is const array.
-2. 
+2. concrete example newstring:
    // book2_newstring.hfile
 #ifndef book2_newstring
 #define book2_newstring
@@ -47,7 +47,7 @@ istream & operator>>(istream & isobject, newString & str)
 {
 	char temp[81];
 	isobject>>setw(81)>>temp;
-	str.strPtr=temp;
+	str=temp;
 	return isobject;
 	
 }
@@ -139,7 +139,12 @@ int main()
 	newString str1("what");
 	newString str2(str1);
 	cout<<(str1==str2);
+	cout<<str1;
+	cin>>str1;
+	cout<<str1;
 	while(1);
 	return 0;
 }
+
+note: if there is problem of stack overflow that break off the process, find whether misuse any valiables or pointers.
 
