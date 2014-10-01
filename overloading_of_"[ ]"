@@ -1,0 +1,145 @@
+1. class list1; const class list2; list1[2]=list2[5]; first excute the list2.operator[](5), because it is const array.
+2. 
+   // book2_newstring.hfile
+#ifndef book2_newstring
+#define book2_newstring
+#include<iostream>
+using namespace std;
+class newString
+{
+	friend ostream & operator<<(ostream & osobject, const newString & str);
+	friend istream & operator>>(istream & isobject, newString & str);
+public:
+	const newString & operator=(const newString &);
+	const newString & operator=(const char * str);
+	newString (const char *);
+	newString();
+	newString(const newString &);
+	~newString();
+	char & operator[](int);
+	const char &operator[](int) const;
+	bool operator==(const newString & str) const;
+	bool operator!=(const newString & str) const;
+	bool operator<=(const newString & str) const;
+	bool operator<(const newString & str) const;
+	bool operator>=(const newString &str) const;
+	bool operator>(const newString &str) const;
+private:
+	char * strPtr;
+	int strLength;
+};
+#endif
+
+   // book2_newstring.cpp
+#include"book2_newstring.h"
+#include<cassert>
+#include<cstring>
+#include<iomanip>
+ostream & operator<<(ostream & osobject, const newString & str)
+{   
+	if (str.strLength!=0)
+		osobject<<str;
+	else 
+		cout<<"string is NULL";
+	return osobject;
+}
+istream & operator>>(istream & isobject, newString & str)
+{
+	char temp[81];
+	isobject>>setw(81)>>temp;
+	str.strPtr=temp;
+	return isobject;
+	
+}
+const newString & newString::operator=(const newString & str)
+{
+	if (this !=&str)
+	{
+		delete [] strPtr;
+		strLength=str.strLength;
+		strPtr=new char [strLength+1];
+		assert(strPtr!=NULL);
+		strcpy(strPtr,str.strPtr);
+	}
+	return *this;
+}
+const newString & newString::operator=(const char * str)
+{
+		delete [] strPtr;
+		strLength=strlen(str);
+		strPtr=new char [strLength+1];
+		assert(strPtr!=NULL);
+		strcpy(strPtr,str);
+		return *this;
+
+}
+newString::newString (const char * str)
+{
+	strLength=strlen(str);
+	strPtr=new char [strLength+1];
+	assert(strPtr!=NULL);
+	strcpy(strPtr,str); 
+}
+newString::newString()
+{
+	strLength=1;
+	strPtr=new char[1];
+	assert(strPtr!=NULL);
+	strcpy(strPtr,"");	
+}
+newString::newString(const newString & str)
+{
+	strLength=str.strLength;
+	strPtr=new char [strLength+1];
+	assert(strPtr!=NULL);
+	strcpy(strPtr, str.strPtr);
+}
+newString::~newString()
+{
+	delete [] strPtr;
+}
+char & newString::operator[](int index)
+{
+	assert(0>=index || index>=strLength);
+	return (strPtr[index]);
+}
+const char &newString::operator[](int index) const
+{
+	assert(0>=index && index>=strLength);
+	return strPtr[index];
+}
+bool newString::operator==(const newString & str) const
+{
+	return (strcmp(this->strPtr,str.strPtr)==0);
+}
+bool newString::operator!=(const newString & str) const
+{
+	return ((strcmp(this->strPtr,str.strPtr)!=0));
+}
+bool newString::operator<=(const newString & str) const
+{
+	return (strcmp(this->strPtr,str.strPtr)<=0);
+}
+bool newString::operator<(const newString & str) const
+{
+	return (strcmp(this->strPtr, str.strPtr)<0);
+}
+bool newString::operator>=(const newString &str) const
+{
+	return (strcmp(this->strPtr, str.strPtr)>=0);
+}
+bool newString::operator>(const newString &str) const
+{
+	return (strcmp(this->strPtr,str.strPtr)>0);
+}
+   // book2_newstring_main.cpp
+#include"book2_newstring.h"
+int main()
+{
+	newString str1("what");
+	newString str2(str1);
+	cout<<(str1==str2);
+	while(1);
+	return 0;
+}
+
