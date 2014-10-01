@@ -1,0 +1,125 @@
+1. form of function template:
+   template<class type>
+   type function_name(type parameter)
+   {}
+   served as same as the common function
+2. form of class template:
+   template<class type>
+   class class_name{};
+3. instantiation(实例化) of template in this form:
+   class_name<real_type>class_object, like :"listType<int> stringList";
+4. member funtion of class template is regarded as function template, in such form:
+   template<class type>
+   void listType<type>::insert(type newvalue){};
+5. concrete example:
+// book2_template.hfile
+#ifndef book2_template
+#define book2_template
+#include<iostream>
+using namespace std;
+template<class elemType>
+class arrayListType
+{
+public:
+	const arrayListType<elemType>&operator=(const arrayListType<elemType>&);
+	bool isEmpty();
+	bool isFull();
+	int listSize();
+	int maxListSize();
+	void print()const;
+	bool isItemAtequal(int location,  const elemType & insertItem);
+	void insertAt(int location, const elemType & insetItem);
+	void insertEnd(const elemType &insertItem);
+	void removeAt(int location);
+	void retrieveAt(int location, elemType & retItem);
+	void replaceAt(int location, const elemType &repItem);
+	void clearList();
+	int seqSearch(const elemType & item);
+	void insert(const elemType& insertItem);
+	void remove(const elemType& removeItem);
+	arrayListType(int size=100);
+	arrayListType(const arrayListType<elemType>&otherList);
+	~arrayListType();
+protected:
+	elemType *list;
+	int length;
+	int maxSize;
+};
+
+template<class elemType>
+void arrayListType<elemType>::insertAt(int location, const elemType & insertItem)
+{
+	int i;
+	if (location<0 || location >=maxSize)
+		cout<<"The position of the item to be inserted"
+		<<"is out of range"<<endl;
+	else if (length>=maxSize)
+		cout<<"Cannot insert in a full list"<<endl;
+	else
+	{
+		for (i=length;i>location;i--)
+		{
+			list[i]=list[i-1];
+		}
+		list[location]=insertItem;
+		length++;
+	}
+}
+
+template<class elemType>
+int arrayListType<elemType>::seqSearch(const elemType &item)
+{
+	int loc;
+	bool found=false;
+	for (loc=0;loc<length;loc++)
+		if (list[loc]==item)
+		{
+			found=true;
+			break;
+		}
+		if (found)
+			return loc;
+		else
+			return -1;
+}
+
+template<class elemType>
+void arrayListType<elemType>::remove(const elemType &removeItem)
+{
+	int loc;
+	if (length==0)
+		cout<<"Cannot delete from an empty list"<<endl;
+	else
+	{
+		loc=seqSearch(removeItem);
+		if (loc!=1)
+			removeAt(loc);
+		else
+			cout<<"The item to be deleted is not in the list"<<endl;
+	}
+}
+
+template<class elemType>
+const arrayListType<elemType> &arrayListType<elemType>::operator=(const arrayListType<elemType> & otherList )
+{
+	if (this !=&otherList)
+	{
+		if (maxSize!=otherList.maxListSize)
+			cout<<"cannot copy. the two arrays are of different sizes "<<endl;
+		else 
+		{
+			int j;
+			maxSize=otherList.maxSize;
+			length=otherList.length;
+			list=new elemType[maxSize];
+			if (length!=0)
+				for (j=0;j<length;j++)
+					list[j]=otherList.list[j];
+		}
+	}
+	return *this;
+}
+
+
+#endif
+   
