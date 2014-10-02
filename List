@@ -1,0 +1,283 @@
+1. list building, in two form: (1) forward manner: new node insert at tail;
+                               (2) backward manner: new node insert at head.
+2. concrecte example of list:
+// book2_list.hfile
+#ifndef book2_list
+#define book2_list
+#include<iostream>
+using namespace std;
+template<class Type>
+struct nodeType
+{
+	Type info;
+	nodeType<Type> *link;
+};
+template<class Type>
+class linkedListType
+{
+public:
+	const linkedListType<Type>&operator=(const linkedListType<Type>&);
+	void initializeList();
+	bool isEmptyList();
+	bool isFullList();
+	void print();
+	int length();
+	void destroyList();
+	void retrieveFirst(Type & firstElement);
+	void search(const Type& searchItem);
+	void insertFirst(const Type &newItem);
+	void insertLast(const Type & newItem);
+	void deleteNode(const Type &deleteItem);
+	linkedListType();
+	linkedListType(const linkedListType<Type>&otherList);
+	~linkedListType();
+protected:
+	nodeType<Type>*first;
+	nodeType<Type>*last;
+};
+
+template<class Type>
+const linkedListType<Type> & linkedListType<Type>::operator=(const linkedListType<Type>& otherList)
+{
+	nodeType<Type> *newNode;
+	nodeType<Type> *current;
+	if (this !=&otherList)
+	{
+		if (first!=NULL) 
+			destroyList();
+		if (otherList.first==NULL)
+		{first=NULL; last=NULL;}
+		else
+		{
+			current=otherList.first;
+			first=new nodeType<Type>;
+			first->info=current->info;
+			first->link=NULL;
+			last=first;
+			current=current->link;
+			while(current!=NULL)
+			{
+				newNode=new nodeType<Type>;
+				newNode->info=current->info;
+				newNode->link=NULL;
+				last->link=newNode;
+				last=newNode;
+				current=current->link;
+			}//end while
+		}// end else
+	}// end else
+	return *this;
+}
+template<class Type>
+void linkedListType<Type>::initializeList()
+{
+	destroyList();
+}
+
+template<class Type>
+bool linkedListType<Type>::isEmptyList()
+{
+	return (first==NULL);
+}
+
+template<class Type>
+bool linkedListType<Type>::isFullList()
+{
+	return ();
+}
+template<class Type>
+void linkedListType<Type>::print()
+{
+	nodeType<Type>* current;
+	current=first;
+	while(current!=NULL)
+	{
+		cout<<current->info<<" ";
+		current=current->link;
+	}
+}
+template<class Type>
+int linkedListType<Type>::length()
+{
+	int count=0;
+	nodeType<Type> *current;
+	current=first;
+	while(current!=NULL)
+	{
+		count++;
+		current=current->link;
+	}
+	return count;
+}
+template<class Type>
+void linkedListType<Type>::destroyList()
+{
+	nodeType<Type> *temp;
+	while(first!=NULL)
+	{
+		temp=first;
+		first=first->link;
+		delete temp;
+	}
+	last=NULL;
+}
+template<class Type>
+void linkedListType<Type>::retrieveFirst(Type & firstElement)
+{
+	firstElement=first->info;
+}
+template<class Type>
+void linkedListType<Type>::search(const Type& searchItem)
+{
+	nodeType<Type> *current;
+	bool found;
+	if(first==NULL)
+	{
+		cout<<"cannot search an empty list"<<endl;
+	}
+	else
+	{
+		current=first;
+		found=false;
+		while(!found && current!=NULL)
+			if (current->info==item)
+				found=true;
+			else
+				current=current->link;
+		if (found)
+			cout<<"item is found in the list"<<endl;
+		else
+			cout<<"item is not in the list"<<enld;
+	}
+}
+template<class Type>
+void linkedListType<Type>::insertFirst(const Type &newItem)
+{
+	nodeType<Type> * newnode;
+	newnode=new nodeType <Type>;
+	newnode->info=newItem;
+	newnode->link=first;
+	first=newnode;
+	if (last==NULL)
+		last=newnode;
+}
+template<class Type>
+void linkedListType<Type>::insertLast(const Type & newItem)
+{
+	nodeType<Type> * newnode;
+	newnode=new nodeType<Type>;
+	newnode->info=newItem;
+	newnode->link=NULL;
+	if (first==NULL)
+	{first=newnode; last=newnode;}
+	else
+	{last->link=newnode;last=newnode;}
+}
+template<class Type>
+void linkedListType<Type>::deleteNode(const Type &deleteItem)
+{
+	nodeType<Type> *current;
+	nodeType<Type> *trailCurrent;
+	bool found;
+	if (first==NULL)
+		cout<<"cannot delete from an empty lsit"<<endl;
+	else
+	{
+		if (first->info==deleteItem)
+		{
+			current=first;
+			first=first->link;
+			if (first==NULL)
+				last=NULL;
+			delete current;
+		}
+		else
+		{
+			found=false;
+			trailCurrent=first;
+			current=first->link;
+			while((!found)&&(current!=NULL))
+			{
+				if (current->info!=deleteItem)
+				{
+					trailCurrent=current;
+					current=current->link;
+				}
+				else
+					found=true;
+			}
+			if (found)
+			{
+				trailCurrent->link=current->link;
+				if (last==current)
+					last=trailCurrent;
+				delete current;
+			}
+			else
+				cout<<"Item to be deleted is not in the list"<<endl;
+		}
+	}
+}
+template<class Type>
+linkedListType<Type>::linkedListType()
+{
+	first=NULL;
+	last=NULL;
+}
+template<class Type>
+linkedListType<Type>::linkedListType(const linkedListType<Type>&otherList)
+{
+	nodeType<Type> *newNode;
+	nodeType<Type> *current;
+	if (otherList.first==NULL)
+	{
+		first=NULL;
+		last=NULL;
+	}
+	else
+	{
+		current=otherList.first;
+		first=new nodeType<Type>;
+		first->info=current->info;
+		first->link=NULL;
+		last=first;
+		current=current->link;
+		while(current!=NULL)
+		{
+			newNode=new nodeType<Type>;
+			newNode->info=current->info;
+			newNode->link=NULL;
+			last->link=newNode;
+			last=newNode;
+			current=current->link;
+		}
+	}
+}
+template<class Type>
+linkedListType<Type>::~linkedListType()
+{
+	nodeType<Type> *temp;
+	while(first!=NULL)
+	{
+		temp=first;
+		first=first->link;
+		delete temp;
+	}
+	last=NULL;
+}
+#endif
+
+// book2_list_main
+#include"book2_list.h"
+int main()
+{
+	linkedListType<int> newlist;
+	//cout<< newlist.isEmptyList();
+	newlist.insertFirst(34);
+	newlist.insertLast(44);
+	newlist.insertFirst(24);
+	newlist.print();
+	//cout<<"how are you"<<endl;
+	while(1);
+	return 0;
+}
